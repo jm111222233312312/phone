@@ -48,5 +48,12 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.MyViewHolder
         }
     }
 
+    //mainactivity에서 해도 되지만 코드 간결성을 위해 여기에서 작업
+    //insert
+    public void addItem(Phone phone){
+        phoneList.add(phone);
+        notifyDataSetChanged();//새로고침
+    }
+
 }
 

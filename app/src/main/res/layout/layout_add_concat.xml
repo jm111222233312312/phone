@@ -27,4 +27,5 @@
     android:background="@android:color/darker_gray">
 
 </View>
+
 </LinearLayout>

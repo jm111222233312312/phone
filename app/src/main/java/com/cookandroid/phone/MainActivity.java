@@ -1,12 +1,16 @@
 package com.cookandroid.phone;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         floatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                addContact();
             }
         });
 
@@ -55,5 +59,43 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void addContact(){
+        View dialogView = LayoutInflater.from(getApplicationContext())
+                .inflate(R.layout.layout_add_concat,null);
+
+        final EditText etName = dialogView.findViewById(R.id.etname);
+        final EditText etTel = dialogView.findViewById(R.id.etle);
+
+        AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+        dlg.setTitle("연락처 등록");
+        dlg.setView(dialogView);
+        dlg.setPositiveButton("등록", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Phone phoneDto = new Phone();
+                phoneDto.setName(etName.getText().toString());
+                phoneDto.setTel(etTel.getText().toString());
+
+                Log.d("insert response","onClick: 등록 클릭 시 값 확인"+phoneDto);
+
+                PhoneService phoneService = Retrofit2Client.getInstance().getPhoneService();
+                Call<Phone> call = phoneService.save(phoneDto);
+
+                call.enqueue(new Callback<Phone>() {
+                    @Override
+                    public void onResponse(Call<Phone> call, Response<Phone> response) {
+                    phoneAdapter.addItem(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Phone> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+        dlg.show();
     }
 }
