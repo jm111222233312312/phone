@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        PhoneService phoneService = Retrofit2Client.getInstance().getPhoneService();//PhoneService객체 반환
+        PhoneService phoneService = Retrofit2Client.getInstance().getPhoneService();//만들어진 PhoneService객체 반환
         Call<List<Phone>> call = phoneService.findAll();//데이터 조회, 스프링부트랑 연결.response.body()로 받아옴
         call.enqueue(new Callback<List<Phone>>() {
             @Override
             public void onResponse(Call<List<Phone>> call, Response<List<Phone>> response) {
                 List<Phone> phoneList = response.body();
-                recyclerView = findViewById(R.id.recyclerview);//recyclerview에 뿌림
+                recyclerView = findViewById(R.id.recyclerview);//받아온 값을 recyclerview에 뿌림
                 manager =new LinearLayoutManager(MainActivity.this,RecyclerView.VERTICAL,false);
                 recyclerView.setLayoutManager(manager);//recyclerview와 manager 연결
                 phoneAdapter = new PhoneAdapter(phoneList);
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 call.enqueue(new Callback<Phone>() {
                     @Override
                     public void onResponse(Call<Phone> call, Response<Phone> response) {
-                    phoneAdapter.addItem(response.body());
+                    phoneAdapter.addItem(response.body()); //저장된 객체가 ArrayList에 추가
                     }
 
                     @Override
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+        dlg.setNegativeButton("닫기",null);
         dlg.show();
     }
 }

@@ -5,21 +5,23 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp">
-<EditText
+    <EditText
+        android:id="@+id/etname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:hint="Name: "
+        android:textSize="16sp"/>
+
+    <EditText
     android:id="@+id/etle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="Tel: "/>
-<EditText
-    android:id="@+id/etname"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
-    android:gravity="center_vertical"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:hint="Name: "
-    android:textSize="16sp"/>
+
 <View
     android:layout_marginTop="2dp"
     android:layout_width="match_parent"

@@ -11,7 +11,7 @@ public class Retrofit2Client {
                 .baseUrl("http://10.100.102.28:8899")//내가 만든 스프링부트 서버
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        phoneService = retrofit.create(PhoneService.class);
+        phoneService = retrofit.create(PhoneService.class);// PhoneService객체를 통해서 Retrofit을 생성할 것임.
     }
     public static Retrofit2Client getInstance(){
         if (instance==null){
