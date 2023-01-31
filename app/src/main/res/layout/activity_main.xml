@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+<!--RecyclerView는 재사용 역할. RecyclerViewManager로 뷰를 관리, 어뎁터로 데이터 관리 어뎁터는 뷰홀더로 관리(메소드 3개 오버라이드,개수 리턴->몇번 동작하라, 위치값은 onBind함수-->
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recyclerview"
       android:layout_width="match_parent"
